@@ -1,0 +1,68 @@
+{
+	"input_elements": [
+		{
+			"target": {
+				"target_ids": ["QuantifyWorkflow.bams"],
+				"name": "input_files",
+				"handler": "input_mapping.py"
+			},
+			"display_element": {
+				"type": "file_chooser",
+                "regex_filter": ".*.bam",
+				"label": "Input BAM files:",
+				"choose_multiple": true,
+				"description": "Choose input BAM-format files to quantify.  Files should end with \".bam\"."
+			}	
+		},
+		{
+			"target": {
+				"target_ids": ["QuantifyWorkflow.gtf"],
+				"name": "genome_choice",
+				"handler": "genome_mapper.py"
+			},
+			"display_element": {
+				"type": "select",
+				"label": "Reference genome",
+				"description": "Choose the reference genome to use for this process.",
+				"choices": [
+					{
+						"value": "Ensembl Homo sapiens GRCh38.95",
+						"display": "Ensembl Homo sapiens GRCh38.95"
+					},
+					{
+						"value": "Ensembl Mus musculus GRCm38.95",
+						"display": "Ensembl Mus musculus GRCm38.95"
+					}
+				]
+			}
+		},
+		{
+			"target":"QuantifyWorkflow.output_counts_filename",
+			"display_element": {
+				"type": "text",
+				"label": "Output name:",
+				"description": "Name the output file.  Please add the file extension, e.g. tsv:"
+			}
+		},
+		{
+			"target": "QuantifyWorkflow.git_repo_url",
+			"display_element": {
+				"type": "dynamic_hidden",
+				"handler": "add_git_repo_url.py",
+				"context_args": {
+					"variable_name": "git_repo_url"
+				}
+			}
+		},
+		{
+			"target": "QuantifyWorkflow.git_commit_hash",
+			"display_element": {
+				"type": "dynamic_hidden",
+				"handler": "add_git_hash.py",
+				"context_args": {
+					"variable_name": "git_commit_hash"
+				}
+			}
+		}
+	]
+}
